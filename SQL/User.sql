@@ -11,3 +11,14 @@ create table Userinfo (
 	create_date DATETIME NOT NULL,
 	update_date DATETIME NOT NULL
 );
+
+INSERT 
+INTO Userinfo 
+VALUES 
+(1, 
+'admin',
+'ä«óùé“',
+'1994/11/25',
+'kaka22',
+'2018/01/29',
+'2018/01/29'); 
