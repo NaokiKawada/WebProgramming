@@ -21,8 +21,12 @@
 		</div>
 
 
-		<p>
+		<p class="text-danger">
   			${message}
+		</p>
+
+		<p class="text-success">
+  			${logoutmessage}
 		</p>
 
 		<form action="Index" method="post">

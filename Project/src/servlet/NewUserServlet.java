@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserInfoDao;
 import model.UserInfo;
@@ -32,6 +33,12 @@ public class NewUserServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		 HttpSession session = request.getSession();
+		 if(session.getAttribute("userinfo") == null) {
+			 response.sendRedirect("Index");
+			 return;
+		 }
+
         String loginId = request.getParameter("loginid");
 
 
@@ -48,8 +55,43 @@ public class NewUserServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+        request.setCharacterEncoding("UTF-8");
+
+
+
+
+        String loginid = request.getParameter("loginid");
+        String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
+		String name = request.getParameter("name");
+		String birthday = request.getParameter("birthday");
+
+		boolean isError = false;
+
+		if(loginid.equals("")||password.equals("")||name.equals("")||birthday.equals("")) {
+			isError = true;
+		}
+
+
+		if(!password.equals(password2)) {
+			isError = true;
+		}
+
+        UserInfoDao dao = new UserInfoDao();
+        boolean Ischeck = dao.searchbylogin(loginid);
+        if(Ischeck) {
+        	isError = true;
+        }
+
+        if(isError) {
+        	  request.setAttribute("error","入力された内容は正しくありません");
+        	  RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/newUser.jsp");
+        	    dispatcher.forward(request, response);
+        	} else {
+        	  dao.findbylogin(loginid, password,name,birthday);
+        	  response.sendRedirect("UserList");
+        	}
+
 	}
 
 }

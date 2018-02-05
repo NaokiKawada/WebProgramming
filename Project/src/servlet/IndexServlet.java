@@ -33,9 +33,15 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		 HttpSession session = request.getSession();
+		 if(session.getAttribute("userinfo") == null) {
+			 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+		        dispatcher.forward(request, response);
+		 } else {
+			 response.sendRedirect("UserList");
+		 }
 
-		 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
-	        dispatcher.forward(request, response);
+
 	}
 
 
@@ -52,8 +58,7 @@ public class IndexServlet extends HttpServlet {
         UserInfo userInfo = dao.findbylogin(loginId, password);
 
         if(userInfo == null) {
-        	  request.setAttribute("message","ログイン失敗");
-
+        	  request.setAttribute("error","入力された内容は正しくありません");
         	  RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
               dispatcher.forward(request, response);
         } else {

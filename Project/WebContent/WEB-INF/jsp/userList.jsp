@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ page import="model.UserInfo" %>
+
 
 <!doctype html>
 <html lang="ja">
@@ -35,9 +37,7 @@
 			<h1>ユーザ一覧</h1>
 			<br />
 			<div align="right">
-				<a class="btn bg-dark text-white btn-sm"
-					href="NewUserServlet"
-					role="button">新規登録</a>
+				<a class="btn bg-dark text-white btn-sm" href="NewUserServlet?loginid=${user.loginid}" role="button">新規登録</a>
 			</div>
 			<br />
 
@@ -62,11 +62,11 @@
 					</a><a>　</a>
 					<div class="row">
 						<div class="col">
-							<input type="text" class="form-control" placeholder="年 / 月 / 日">
+							<input type="date" class="form-control" placeholder="年 / 月 / 日">
 						</div>
 						<a> ～ </a>
 						<div class="col">
-							<input type="text" class="form-control" placeholder="年 / 月 / 日">
+							<input type="date" class="form-control" placeholder="年 / 月 / 日">
 						</div>
 					</div>
 				</div>
@@ -97,10 +97,17 @@
 							<div align="center">
 								<a class="btn bg-dark text-white btn-sm" href="UserInfo?loginid=${user.loginid}"
 									role="button"> 詳細 </a>
+
+						    <% UserInfo user = (UserInfo) session.getAttribute("loginid");
+						       if(user.getloginid().equal("admin")){%>
 							    <a class="btn bg-dark text-white btn-sm" href="UserUpdateServlet?loginid=${user.loginid}"
 									role="button"> 更新 </a>
+							<% }%>
+
+						    <% if(user.getloginid().equal("admin")){%>
 								<a class="btn bg-dark text-white btn-sm" href="UserDeleteServlet?loginid=${user.loginid}"
 									role="button"> 削除 </a>
+							<% }%>
 							</div>
 						</td>
 					</tr>

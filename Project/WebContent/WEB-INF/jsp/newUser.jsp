@@ -32,44 +32,50 @@
 	    <div align="center">
 	    <h1>ユーザ新規登録</h1></div><br/>
 
-<form>
+	    		<p class="text-danger">
+  			${error}
+		</p>
+
+<form action="NewUserServlet" method="post">
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">ログインID</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword" placeholder="Login ID">
+      <input type="text" class="form-control" id="inputPassword" placeholder="Login ID" name = "loginid">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">パスワード</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name = "password">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">パスワード(確認)</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password" name = "password2">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">ユーザ名</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword" placeholder="User Name">
+      <input type="text" class="form-control" id="inputPassword" placeholder="User Name" name="name">
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword" class="col-sm-2 col-form-label">生年月日</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword" placeholder="Birthday">
+      <input type="date" class="form-control" id="inputPassword" placeholder="Birthday" name = birthday>
     </div>
   </div>
-</form>
+
 <br/>
 <div class="btn-group-toggle" data-toggle="buttons"  align="center">
-  <a class="btn bg-dark text-white" href="file:///C:/Users/naoki/Documents/git/Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/Mock/userList.html" role="button">　　登　録　　</a>
+  <input type="submit" class="btn bg-dark text-white"  role="button" value="　　登　録　　">
 </div>
+</form>
 <br/>
 <br/>
+
 
 <div align="left">
       	  <a class="btn bg-dark text-white btn-sm" href="UserList" role="button">戻る</a>

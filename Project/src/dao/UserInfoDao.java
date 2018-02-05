@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.Utill;
 import model.UserInfo;
 
 public class UserInfoDao {
@@ -15,7 +16,7 @@ public class UserInfoDao {
         Connection conn = null;
 
         try {
-            // データベースへ接続
+            // データベースへ接続keyakizaka
             conn = DBManager.getConnection();
 
             // SELECT文を準備
@@ -24,11 +25,9 @@ public class UserInfoDao {
              // SELECTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, loginId);
-            pStmt.setString(2, password);
+            pStmt.setString(2, Utill.passwordMD5(password));
             ResultSet rs = pStmt.executeQuery();
 
-            // 結果表に格納されたレコードの内容を
-            // Employeeインスタンスに設定し、ArrayListインスタンスに追加
             if (!rs.next()) {
                 return null;
             }
@@ -107,8 +106,6 @@ public class UserInfoDao {
              // SELECTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, loginId);
-
-
             ResultSet rs = pStmt.executeQuery();
 
             // 結果表に格納されたレコードの内容を
@@ -141,5 +138,132 @@ public class UserInfoDao {
         }
     }
 
+    public void findbylogin(String loginid,String password,String name, String birthday) {
+        Connection conn = null;
 
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "INSERT INTO Userinfo (login_id, password, name, birth_date,create_date,update_date) VALUES (? , ? , ? , ?, now(), now())";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, loginid);
+            pStmt.setString(2, Utill.passwordMD5(password));
+            pStmt.setString(3, name);
+            pStmt.setString(4, birthday);
+            pStmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();                }
+            }
+        }
+    }
+
+    public void updatelogin(String loginid,String password,String name, String birthday) {
+        Connection conn = null;
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "update Userinfo set password = ? , name = ?, birth_date = ? where login_id = ?";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, Utill.passwordMD5(password));
+            pStmt.setString(2, name);
+            pStmt.setString(3, birthday);
+            pStmt.setString(4, loginid);
+            pStmt.executeUpdate();
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+	public void delete(String loginId) {
+        Connection conn = null;
+
+        try {
+            // データベースへ接続
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "DELETE FROM Userinfo where login_id = ?";
+
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, loginId);
+            pStmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+	}
+
+    public boolean searchbylogin(String loginid) {
+        Connection conn = null;
+
+        try {
+            // データベースへ接続keyakizaka
+            conn = DBManager.getConnection();
+
+            // SELECT文を準備
+            String sql = "select * from userinfo where login_id = ?";
+
+             // SELECTを実行し、結果表を取得
+            PreparedStatement pStmt = conn.prepareStatement(sql);
+            pStmt.setString(1, loginid);
+            ResultSet rs = pStmt.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // データベース切断
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }
+    }
 }

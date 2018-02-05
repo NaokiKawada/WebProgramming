@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class UserInfo implements Serializable {
     private String loginid;
@@ -27,8 +28,13 @@ public class UserInfo implements Serializable {
 		this.loginid = loginid;
 		this.name = name;
 		this.birthday = birthday;
+	}
 
-		// TODO 自動生成されたコンストラクター・スタブ
+	public UserInfo(String loginid, String password, String name,String birthday) {
+		this.loginid = loginid;
+		this.name = password;
+		this.birthday = name;
+		this.birthday = birthday;
 	}
 
 	public UserInfo (String loginId,String name, String birthday , String password , String createdate , String updatedate) {
@@ -66,6 +72,11 @@ public class UserInfo implements Serializable {
 	}
 
 	public String getBirthday() {
+		return birthday;
+	}
+
+	public SimpleDateFormat getBirthdayFormat() {
+		SimpleDateFormat birthday = new SimpleDateFormat("yyyy年MM月dd日");
 		return birthday;
 	}
 

@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -21,21 +22,27 @@
 		<ul class="nav nav-pills">
 			<li class="nav-item"><a class="nav-link text-white bg-dark"
 				href="file:///C:/Users/naoki/Documents/git/Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/Mock/userInfo-id0001.html">${userinfo.name}さん</a></li>
-			<li class="nav-item"><a class="nav-link text-danger" href="Logout">ログアウト
-
-</a>
-			</li>
+			<li class="nav-item"><a class="nav-link text-danger"
+				href="Logout">ログアウト </a></li>
 		</ul>
 	</nav>
 
-	  <div class="container "><br/><br/>
+	<div class="container ">
+		<br /> <br />
+		<div align="center">
+			<h1>ユーザ削除確認</h1>
+		</div>
+		<br /> <a>ログインID :${user.loginid}<br /> を本当に削除してもよろしいでしょうか。
+		</a>
+		<div>
+			<br />
 
-	    <div align="center">
-	    <h1>ユーザ削除確認</h1></div><br/>
-	  <a>ログインID :${user.loginid}<br/>
-	     を本当に削除してもよろしいでしょうか。</a>
+					<a class="btn bg-dark text-white" href="UserList" role="button">
+						キャンセル<br/></a>
+					<form action="UserDeleteServlet" method="post">
+						<input type="submit" class="btn bg-dark text-white" href="UserDeleteServlet" role="button" value="　　OK　　">
+						<input type="hidden" name="loginid" value="${user.loginid}">
+					</form>
 
-	  <div><br/>
-      	  <a class="btn bg-dark text-white" href="UserList" role="button">　キャンセル　</a>
-		  <a class="btn bg-dark text-white" href="file:///C:/Users/naoki/Documents/git/Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/Mock/userList.html" role="button">　　　OK　　　</a>
-	    </div>
+		</div>
+	</div>

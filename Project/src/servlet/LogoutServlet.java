@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +31,10 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("userinfo");
-		response.sendRedirect("Index");
-	}
+  	  request.setAttribute("logoutmessage","ログアウトしました。");
+
+  	  RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
+        dispatcher.forward(request, response);	}
 
 
 
