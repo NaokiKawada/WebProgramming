@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.UserInfo;
 import dao.UserInfoDao;
-import model.UserInfo;
 
 /**
  * Servlet implementation class Index
@@ -58,7 +58,7 @@ public class IndexServlet extends HttpServlet {
         UserInfo userInfo = dao.findbylogin(loginId, password);
 
         if(userInfo == null) {
-        	  request.setAttribute("error","入力された内容は正しくありません");
+        	  request.setAttribute("error","ログインIDまたはパスワードが異なります");
         	  RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/index.jsp");
               dispatcher.forward(request, response);
         } else {

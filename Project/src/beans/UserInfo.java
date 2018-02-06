@@ -1,7 +1,9 @@
-package model;
+package beans;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UserInfo implements Serializable {
     private String loginid;
@@ -12,7 +14,8 @@ public class UserInfo implements Serializable {
     private String updatedate;
 
 
-
+    public UserInfo() {
+    }
 
     public UserInfo(String loginid) {
     	this.loginid = loginid;
@@ -75,10 +78,20 @@ public class UserInfo implements Serializable {
 		return birthday;
 	}
 
-	public SimpleDateFormat getBirthdayFormat() {
-		SimpleDateFormat birthday = new SimpleDateFormat("yyyy年MM月dd日");
-		return birthday;
+	public String getBirthdayFormat() {
+		try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date formatDate = sdf.parse(birthday);
+
+		String str = new SimpleDateFormat("yyyy年MM月dd日").format(formatDate);
+
+		return str;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
+
 
 	public void setBirthday(String birthday) {
 		this.birthday = birthday;
@@ -88,12 +101,40 @@ public class UserInfo implements Serializable {
 		return createdate;
 	}
 
+	public String getCreatedateFormat() {
+		try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date formatDate = sdf.parse(createdate);
+
+		String str = new SimpleDateFormat("yyyy年MM月dd日 HH:mm").format(formatDate);
+
+		return str;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
+
 	public void setCreatedate(String createdate) {
 		this.createdate = createdate;
 	}
 
 	public String getUpdatedate() {
 		return updatedate;
+	}
+
+	public String getUpdatedateFormat() {
+		try {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		Date formatDate = sdf.parse(updatedate);
+
+		String str = new SimpleDateFormat("yyyy年MM月dd日 HH:mm").format(formatDate);
+
+		return str;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 
 	public void setUpdatedate(String updatedate) {

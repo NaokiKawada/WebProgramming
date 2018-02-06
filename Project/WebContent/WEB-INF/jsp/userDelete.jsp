@@ -34,15 +34,25 @@
 		</div>
 		<br /> <a>ログインID :${user.loginid}<br /> を本当に削除してもよろしいでしょうか。
 		</a>
-		<div>
+		<form action="UserDeleteServlet" method="post">
+
 			<br />
+			<div style="float: left;">
+				<a class="btn bg-dark text-white" href="UserList" role="button">
+					キャンセル </a>
+			</div>
+			<div style="float: left;">
+				<a> </a>
+			</div>
 
-					<a class="btn bg-dark text-white" href="UserList" role="button">
-						キャンセル<br/></a>
-					<form action="UserDeleteServlet" method="post">
-						<input type="submit" class="btn bg-dark text-white" href="UserDeleteServlet" role="button" value="　　OK　　">
-						<input type="hidden" name="loginid" value="${user.loginid}">
-					</form>
+			<div style="float: left;">
+				<input type="submit" class="btn bg-dark text-white"
+					 role="button" value="　　OK　　"> <input
+					type="hidden" name="loginid" value="${user.loginid}">
+			</div>
 
-		</div>
+		</form>
+
 	</div>
+   </body>
+  </html>

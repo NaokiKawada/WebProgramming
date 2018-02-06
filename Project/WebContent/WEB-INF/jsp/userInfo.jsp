@@ -54,19 +54,19 @@
 			  <div class="form-group row">
 			    <label for="staticEmail" class="col-sm-2 col-form-label">生年月日</label>
 			    <div class="col-sm-10">
-			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.birthday}">
+			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.birthdayFormat}">
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="staticEmail" class="col-sm-2 col-form-label">登録日時</label>
 			    <div class="col-sm-10">
-			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.createdate}">
+			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.createdateFormat}">
 			    </div>
 			  </div>
 			  <div class="form-group row">
 			    <label for="staticEmail" class="col-sm-2 col-form-label">更新日時</label>
 			    <div class="col-sm-10">
-			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.updatedate}">
+			      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="${user.updatedateFormat}">
 			    </div>
 			  </div>
 			</form>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<%@ page import="model.UserInfo" %>
+<%@ page import="beans.UserInfo" %>
 
 
 <!doctype html>
@@ -40,20 +40,17 @@
 				<a class="btn bg-dark text-white btn-sm" href="NewUserServlet?loginid=${user.loginid}" role="button">新規登録</a>
 			</div>
 			<br />
-
-			<form>
+	<form action="UserList" method="post">
 				<div class="form-group row">
 					<label for="inputPassword" class="col-sm-2 col-form-label">ログインID</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputPassword"
-							placeholder="Login ID">
+						<input type="text" class="form-control" id="inputPassword" placeholder="Login ID" name="loginid">
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="inputPassword" class="col-sm-2 col-form-label">ユーザ名</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="inputPassword"
-							placeholder="User Name">
+						<input type="text" class="form-control" id="inputPassword" placeholder="User Name" name="name">
 					</div>
 				</div>
 
@@ -62,19 +59,19 @@
 					</a><a>　</a>
 					<div class="row">
 						<div class="col">
-							<input type="date" class="form-control" placeholder="年 / 月 / 日">
+							<input type="date" class="form-control" placeholder="年 / 月 / 日" name="birthdayFrom">
 						</div>
 						<a> ～ </a>
 						<div class="col">
-							<input type="date" class="form-control" placeholder="年 / 月 / 日">
+							<input type="date" class="form-control" placeholder="年 / 月 / 日" name="birthdayTo">
 						</div>
 					</div>
 				</div>
-			</form>
 
-			<div align="right">
-				<a class="btn bg-dark text-white" href="" role="button"> 検 索 </a>
+			<div  align="right">
+						<input type="submit" class="btn bg-dark text-white"  role="button" value="　検　索　">
 			</div>
+	</form>
 
 			<Hr class="text-light bg-dark">
 
@@ -92,22 +89,27 @@
 					<tr>
 						<th scope="row">${user.loginid}</th>
 						<td>${user.name}</td>
-						<td>${user.birthday}</td>
+						<td>${user.birthdayFormat}</td>
 						<td>
 							<div align="center">
 								<a class="btn bg-dark text-white btn-sm" href="UserInfo?loginid=${user.loginid}"
 									role="button"> 詳細 </a>
 
-						    <% UserInfo user = (UserInfo) session.getAttribute("loginid");
-						       if(user.getloginid().equal("admin")){%>
+								<c:if test="${userinfo.loginid == 'admin'}">
 							    <a class="btn bg-dark text-white btn-sm" href="UserUpdateServlet?loginid=${user.loginid}"
 									role="button"> 更新 </a>
-							<% }%>
+									</c:if>
 
-						    <% if(user.getloginid().equal("admin")){%>
+								<c:if test="${userinfo.loginid == user.loginid}">
+							    <a class="btn bg-dark text-white btn-sm" href="UserUpdateServlet?loginid=${user.loginid}"
+									role="button"> 更新 </a>
+									</c:if>
+
+								<c:if test="${userinfo.loginid == 'admin'}">
 								<a class="btn bg-dark text-white btn-sm" href="UserDeleteServlet?loginid=${user.loginid}"
 									role="button"> 削除 </a>
-							<% }%>
+									</c:if>
+
 							</div>
 						</td>
 					</tr>

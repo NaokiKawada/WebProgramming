@@ -22,7 +22,7 @@
 
 
 		<p class="text-danger">
-  			${message}
+  			${error}
 		</p>
 
 		<p class="text-success">

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import beans.UserInfo;
 import common.Utill;
-import model.UserInfo;
 
 public class UserInfoDao {
 
@@ -62,11 +62,12 @@ public class UserInfoDao {
 
 
             // SELECT文を準備
-            String sql = "select * from userinfo";
+            String sql = "select * from userinfo where login_id not in ('admin')";
 
              // SELECTを実行し、結果表を取得
             PreparedStatement pStmt = conn.prepareStatement(sql);
             ResultSet rs = pStmt.executeQuery();
+
 
 			// Employeeインスタンスに設定し、ArrayListインスタンスに追加
             while (rs.next()) {
