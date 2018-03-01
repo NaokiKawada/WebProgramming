@@ -70,12 +70,11 @@
 
 <br/>
 <div class="btn-group-toggle" data-toggle="buttons"  align="center">
-  <input type="submit" class="btn bg-dark text-white"  role="button" value="　　登　録　　">
+  <input type="submit" class="btn bg-dark text-white" role="button" value="　　登　録　　">
 </div>
 </form>
 <br/>
 <br/>
-
 
 <div align="left">
       	  <a class="btn bg-dark text-white btn-sm" href="UserList" role="button">戻る</a>

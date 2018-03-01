@@ -22,7 +22,7 @@
 		<a class="navbar-brand" href="#"></a>
 		<ul class="nav nav-pills">
 			<li class="nav-item"><a class="nav-link text-white bg-dark"
-				href="file:///C:/Users/naoki/Documents/git/Web%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/Mock/userInfo-id0001.html">${userinfo.name}さん</a></li>
+				href="">${userinfo.name}さん</a></li>
 			<li class="nav-item"><a class="nav-link text-danger" href="Logout">ログアウト
 
 </a>
